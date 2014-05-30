@@ -3,9 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-
-GET     /main                           com.ploto.controllers.MainController.main()
+GET     /                           com.ploto.controllers.MainController.main()
 
 GET     /mainframe                           com.ploto.controllers.MainController.mainframe()
 
