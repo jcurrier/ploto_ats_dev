@@ -1,0 +1,23 @@
+@(activities: List[com.ploto.services.Activity])
+
+<div class="inner-padding">
+    <div class="subheading">
+        <h3>Recent Activity</h3>
+    </div>
+    <div class="activity-stream">
+        @for(currentActivity <- activities) {
+            <div class="activity-stream-item">
+                <img src="images/users/user-2.jpg" alt="" class="avatar"/>
+                <div class="activity-stream-content">
+                    <div class="activity-stream-user">
+                        <a href="#" class="bold">@currentActivity.getUser</a>
+                        <small class="text-muted pull-right">@currentActivity.getTime</small>
+                    </div>
+                    <div class="activity-stream-title">
+                        @currentActivity.getText
+                    </div>
+                </div>
+            </div>
+        }
+    </div><!-- End .activity-stream -->
+</div><!-- End .inner-padding -->
