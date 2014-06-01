@@ -24,11 +24,20 @@ public class Application extends Controller {
         return ok(main.render("Your new application is ready.", activities));
     }
 
+    public static Result logout() {
+        session().clear();
+        flash("success", "You've been logged out");
+        return redirect(
+                com.ploto.controllers.routes.Application.login()
+        );
+    }
+
     public static Result authenticate() {
         System.out.println("In App::authenticate");
         Form<Login> loginForm = form(Login.class).bindFromRequest();
+        System.out.println("user = " + loginForm.data().get("email") + " pw = " + loginForm.data().get("password"));
         if(loginForm.hasErrors()) {
-            return badRequest(login.render(loginForm));
+            return badRequest(com.ploto.views.html.login.render(loginForm));
         } else {
             session("email", loginForm.get().email);
             return redirect(
@@ -43,9 +52,6 @@ public class Application extends Controller {
 
         public String validate() {
             System.out.println("In Login::validate");
-            if(email == null || email.length() < 1) {
-                return "Invalid user or password";
-            }
             return null;
         }
     }

@@ -13,8 +13,9 @@
             <img src="images/users/user-1.jpg" alt="" class="avatar"/>
             <span class="indicator-dot">2</span>
             <ul class="sidebar-profile-list">
-                <li><h3>Hi, Jeff Currier</h3></li>
-                <li><a href="#">Profile</a>  | <a href="#">Logout</a></li>
+                <li><h3>Hi, @session.get("email")</h3></li>
+                <li><a href="#">Profile</a>  | <a href="@com.ploto.controllers.routes.Application.logout()">Logout</a>
+                    </li>
             </ul>
         </div><!-- End .sidebar-profile -->
     </div><!-- End .sidebar-module -->

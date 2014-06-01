@@ -5,6 +5,8 @@
 # Home page
 GET     /                           com.ploto.controllers.Application.index()
 
+GET     /logout                     com.ploto.controllers.Application.logout()
+
 GET     /login                      com.ploto.controllers.Application.login()
 POST    /login                      com.ploto.controllers.Application.authenticate()
 
