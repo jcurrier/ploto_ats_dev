@@ -17,6 +17,7 @@ public class Application extends Controller {
         return ok(login.render(form(Login.class)));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result index() {
         ArrayList<Activity> activities = new ArrayList<Activity>();
         activities.add(new Activity("activity 1", "user", "Sunday 7:00PM"));
@@ -24,6 +25,7 @@ public class Application extends Controller {
         return ok(main.render("Your new application is ready.", activities));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result logout() {
         session().clear();
         flash("success", "You've been logged out");

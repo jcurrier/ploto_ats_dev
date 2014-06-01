@@ -1,3 +1,5 @@
+@import com.ploto.controllers.routes.Application
+
 <aside id="sidebar-main" class="sidebar">
 
     <div class="sidebar-logo">
@@ -13,8 +15,8 @@
             <img src="images/users/user-1.jpg" alt="" class="avatar"/>
             <span class="indicator-dot">2</span>
             <ul class="sidebar-profile-list">
-                <li><h3>Hi, @session.get("email")</h3></li>
-                <li><a href="#">Profile</a>  | <a href="@com.ploto.controllers.routes.Application.logout()">Logout</a>
+                <li><h3>Hi, @request().username()</h3></li>
+                <li><a href="#">Profile</a>  | <a href="@Application.logout()">Logout</a>
                     </li>
             </ul>
         </div><!-- End .sidebar-profile -->
