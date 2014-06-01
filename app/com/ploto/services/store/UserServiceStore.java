@@ -7,7 +7,7 @@ import com.ploto.services.User;
  */
 public interface UserServiceStore {
 
-  public User createUser(String email, String password) throws StoreException;
+  public User createUser(String customerId, String email, String password) throws StoreException;
 
   public void removeUser(String email) throws StoreException;
 

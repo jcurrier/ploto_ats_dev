@@ -15,11 +15,11 @@ import java.sql.ResultSet;
 public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStore {
 
   private final String CREATE_USER =
-          "INSERT INTO user (email, password) VALUES(?, ?)";
+          "INSERT INTO user (customer_id, id, password) VALUES(?, ?, ?)";
 
-  private final String REMOVE_USER = "DELETE FROM user WHERE email = ?";
+  private final String REMOVE_USER = "DELETE FROM user WHERE id = ?";
 
-  private final String FETCH_USER = "SELECT * FROM user WHERE email = ? LIMIT 1";
+  private final String FETCH_USER = "SELECT * FROM user WHERE id = ? LIMIT 1";
 
   @Inject
   private UserServiceSqlStore() {
@@ -27,7 +27,7 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
   }
 
   @Override
-  public User createUser(String email, String password) throws StoreException {
+  public User createUser(String customerId, String email, String password) throws StoreException {
     Connection dbConn = null;
 
     try {
@@ -35,8 +35,9 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
 
       PreparedStatement ps = dbConn.prepareStatement(CREATE_USER);
 
-      ps.setString(1, email);
-      ps.setString(2, password);
+      ps.setString(1, customerId);
+      ps.setString(2, email);
+      ps.setString(3, password);
 
       int rowCount = ps.executeUpdate();
       if (rowCount != 1) {
@@ -77,7 +78,14 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
 
   @Override
   public boolean authenicateUser(String email, String password) throws StoreException {
-    return false;
+    boolean verdict = false;
+
+    User user = fetchUser(email);
+    if(user != null && user.getPassword().equals(password) && user.getIsActive() == true) {
+      verdict = true;
+    }
+
+    return verdict;
   }
 
   @Override
@@ -94,8 +102,8 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
       ResultSet results = ps.executeQuery();
       results.first();
 
-      user = new User(results.getString("email"), results.getString("password"), results.getBoolean("is_active"),
-              results.getTimestamp("last_updated"));
+      user = new User(results.getString("customer_id"), results.getString("id"), results.getString("password"),
+              results.getBoolean("is_active"), results.getTimestamp("last_updated"));
 
     } catch (Exception ex) {
       throw new StoreException("Unable to retrieve user", ex);

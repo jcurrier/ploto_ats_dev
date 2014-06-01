@@ -1,0 +1,76 @@
+@(activities: List[com.ploto.services.Activity])
+
+<div class="window">
+    <div class="actionbar">
+        <!--
+        <div class="pull-left">
+            <div class="dropdown">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                    Actions
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <ul role="menu" class="dropdown-menu ext-flags">
+                    <li>
+                        <a href="#">English <img src="images/icons/flags/shiny/16/United-Kingdom.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#">German <img src="images/icons/flags/shiny/16/Germany.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#">French <img src="images/icons/flags/shiny/16/France.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#">Chinees <img src="images/icons/flags/shiny/16/China.png" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        -->
+    </div><!-- End .actionbar-->
+    <div class="row ext-raster">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="inner-padding">
+                        <div class="spacer-20" />
+                    </div>
+                    <div class="row">
+                        <!-- Start grid -->
+                        <section class="col-sm-12">
+                            <!-- New widget -->
+                            <div class="widget">
+                                <h3>widget 1</h3>
+                            </div><!-- End .widget -->
+                            <!-- New widget -->
+                            <div class="widget">
+                                <h3>widget 2</h3>
+                            </div><!-- End .widget -->
+                        </section>
+                    </div>
+                    <div class="spacer-20"></div>
+                    <div class="hr-totop"><span>Top</span></div>
+                    <div class="spacer-40"></div>
+                </div><!-- End .inner-padding -->
+            </div>
+        </div><!-- End .row -->
+    </div>
+    <!--                     -->
+    <!-- Start Activity area -->
+    <!--                     -->
+    <span class="breakpoint-sm ext-raster-line-8"></span>
+    <div class="col-sm-4">
+        <ul class="ext-tabs tabs-negative-position">
+            <li class="active">
+                <a href="#content-tab-10">Application Activity</a>
+            </li>
+        </ul><!-- End .ext-tabs -->
+        <div class="tab-content">
+            <div id="content-tab-10" class="tab-pane active">
+                @com.ploto.views.html.activity_stream(activities)
+            </div>
+        </div>
+    </div>
+</div>
+<span class="ext-raster-line-bottom"></span>
+</div>
+</div><!-- End .window -->

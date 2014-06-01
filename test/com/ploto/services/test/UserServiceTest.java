@@ -17,55 +17,72 @@ import java.util.Map;
  * Created by jeff on 5/24/14.
  */
 public class UserServiceTest {
-    private static PlotoContext mCtx = new PlotoContext();
-    private static FakeApplication mApp = null;
+  private static PlotoContext mCtx = new PlotoContext();
+  private static FakeApplication mApp = null;
 
-    @BeforeClass
-    public static void setup() {
+  @BeforeClass
+  public static void setup() {
 
-        PlotoContext.createProdBindings();
-        Map<String, String> settings = new HashMap<String, String>();
-        settings.put("db.plotodb.driver", "com.mysql.jdbc.Driver");
-        settings.put("db.plotodb.url", "jdbc:mysql://localhost/plotodb");
-        settings.put("db.plotodb.user", "ploto");
-        settings.put("db.plotodb.password", "dev");
-        mApp = Helpers.fakeApplication(settings);
-        Helpers.start(mApp);
+    PlotoContext.createProdBindings();
+    Map<String, String> settings = new HashMap<String, String>();
+    settings.put("db.plotodb.driver", "com.mysql.jdbc.Driver");
+    settings.put("db.plotodb.url", "jdbc:mysql://localhost/plotodb");
+    settings.put("db.plotodb.user", "ploto");
+    settings.put("db.plotodb.password", "dev");
+    mApp = Helpers.fakeApplication(settings);
+    Helpers.start(mApp);
+  }
+
+  @Test
+  public void createAndRemoveUserTest() {
+    String customerId = "test_co";
+    String email = "joe" + System.currentTimeMillis() + "@ploto.co";
+    String pw = "super_secure";
+
+    UserService userSvc = mCtx.getInjector().getInstance(UserService.class);
+
+    User newUser = userSvc.createUser(customerId, email, pw);
+    Assert.assertNotNull(newUser);
+    Assert.assertEquals(newUser.getEmail(), email);
+    Assert.assertEquals(newUser.getPassword(), pw);
+    Assert.assertTrue(newUser.getIsActive());
+
+    User foundUser = userSvc.fetchUser(email);
+    Assert.assertNotNull(foundUser);
+
+    userSvc.removeUser(email);
+
+    foundUser = userSvc.fetchUser(email);
+    Assert.assertNull(foundUser);
+  }
+
+  @Test
+  public void authenticateUserTest() {
+    String customerId = "test_co";
+    String email = "joe" + System.currentTimeMillis() + "@ploto.co";
+    String pw = "super_secure";
+
+    UserService userSvc = mCtx.getInjector().getInstance(UserService.class);
+
+    User newUser = userSvc.createUser(customerId, email, pw);
+    Assert.assertNotNull(newUser);
+    Assert.assertEquals(newUser.getEmail(), email);
+    Assert.assertEquals(newUser.getPassword(), pw);
+    Assert.assertTrue(newUser.getIsActive());
+
+    boolean verdict = userSvc.authenicateUser(email, pw);
+    Assert.assertTrue("Unable to auth user", verdict);
+
+    verdict = userSvc.authenicateUser(email, "bogus password");
+    Assert.assertFalse("Was able to auth user and shouldn't have been able to", verdict);
+
+  }
+
+  @AfterClass
+  public static void tearDown() {
+
+    if (mApp != null) {
+      Helpers.stop(mApp);
     }
-
-    @Test
-    public void createAndRemoveUserTest() {
-        String email = "joe"+System.currentTimeMillis()+"@ploto.co";
-        String pw = "super_secure";
-
-        UserService jobSvc = mCtx.getInjector().getInstance(UserService.class);
-
-        User newUser = jobSvc.createUser(email, pw);
-        Assert.assertNotNull(newUser);
-        Assert.assertEquals(newUser.getEmail(), email);
-        Assert.assertEquals(newUser.getPassword(), pw);
-        Assert.assertTrue(newUser.getIsActive());
-
-        User foundUser = jobSvc.fetchUser(email);
-        Assert.assertNotNull(foundUser);
-
-        jobSvc.removeUser(email);
-
-        foundUser = jobSvc.fetchUser(email);
-        Assert.assertNull(foundUser);
-
-    }
-
-    @Test
-    public void authenticateUserTest() {
-
-    }
-
-    @AfterClass
-    public static void tearDown() {
-
-        if(mApp != null) {
-            Helpers.stop(mApp);
-        }
-    }
+  }
 }

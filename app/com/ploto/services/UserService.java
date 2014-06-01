@@ -20,16 +20,18 @@ public class UserService {
     mUserServiceStore = PlotoContext.getInjector().getInstance(UserServiceStore.class);
   }
 
-  public User createUser(String email, String password) {
+  public User createUser(String customerId, String email, String password) {
+    Preconditions.checkNotNull(customerId);
     Preconditions.checkNotNull(email);
     Preconditions.checkNotNull(password);
+    Preconditions.checkArgument(customerId.length() > 0, "Invalid customer id");
     Preconditions.checkArgument(email.length() > 0 && email.contains("@"), "Invalid email address");
     Preconditions.checkArgument(password.length() > 0, "Invalid password");
 
     User newUser = null;
 
     try {
-      newUser = mUserServiceStore.createUser(email, password);
+      newUser = mUserServiceStore.createUser(customerId, email, password);
     } catch (StoreException ex) {
 
     }
@@ -50,7 +52,16 @@ public class UserService {
   }
 
   public boolean authenicateUser(String email, String password) {
-    return false;
+    Preconditions.checkNotNull(email);
+    Preconditions.checkArgument(email.length() > 0 && email.contains("@"), "Invalid email address");
+
+    boolean verdict = false;
+    try {
+      verdict = mUserServiceStore.authenicateUser(email, password);
+    } catch (StoreException ex) {
+    }
+
+    return verdict;
   }
 
   public User fetchUser(String email) {

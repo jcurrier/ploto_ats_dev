@@ -8,11 +8,17 @@ import java.util.Date;
  * Created by jeff on 5/23/14.
  */
 public class User {
-
+  private String mCustomerId = null;
   private String mEmail = null;
   private String mPassword = null;
   private Boolean mIsActive = false;
   private Date mLastUpdated = null;
+
+  public String getmCustomerId() { return mCustomerId; }
+
+  public void setCustomerId(String customerId) {
+    this.mCustomerId = customerId;
+  }
 
   public String getEmail() {
     return mEmail;
@@ -50,7 +56,8 @@ public class User {
     this.mLastUpdated = lastUpdated;
   }
 
-  public User(String email, String password, Boolean isActive, Date lastUpdated) {
+  public User(String customerId, String email, String password, Boolean isActive, Date lastUpdated) {
+    this.mCustomerId = customerId;
     this.mEmail = email;
     this.mPassword = password;
     this.mIsActive = isActive;
