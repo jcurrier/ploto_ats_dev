@@ -47,12 +47,12 @@ public class UserServiceTest {
     Assert.assertEquals(newUser.getPassword(), pw);
     Assert.assertTrue(newUser.getIsActive());
 
-    User foundUser = userSvc.fetchUser(email);
+    User foundUser = userSvc.fetchUser(customerId, email);
     Assert.assertNotNull(foundUser);
 
-    userSvc.removeUser(email);
+    userSvc.removeUser(customerId, email);
 
-    foundUser = userSvc.fetchUser(email);
+    foundUser = userSvc.fetchUser(customerId, email);
     Assert.assertNull(foundUser);
   }
 

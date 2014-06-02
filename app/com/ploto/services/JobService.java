@@ -9,6 +9,8 @@ import com.ploto.services.store.JobServiceStore;
 import com.ploto.services.store.StoreException;
 import com.ploto.util.PlotoContext;
 
+import java.util.List;
+
 /**
  * Created by jeff on 5/17/14.
  */
@@ -42,13 +44,13 @@ public class JobService {
 
     UserService userSvc = PlotoContext.getInjector().getInstance(UserService.class);
 
-    if(userSvc.fetchUser(newPosition.getHiringMgrId()) == null) {
+    if(userSvc.fetchUser(newPosition.getCustomerId(), newPosition.getHiringMgrId()) == null) {
       throw new ServiceException("Hiring manager doesn't exist");
     }
 
     // Since assigning a recruiter is optional at this point only check for this if we have to.
     if(newPosition.getRecruiterId() != null) {
-      if(userSvc.fetchUser(newPosition.getRecruiterId()) == null) {
+      if(userSvc.fetchUser(newPosition.getCustomerId(), newPosition.getRecruiterId()) == null) {
         throw new ServiceException("Recruiter doesn't exist");
       }
     }
@@ -77,7 +79,12 @@ public class JobService {
     }
   }
 
-  public ImmutableList<Position> fetchOpenPositions() {
+  public List<Position> fetchOpenPositions(String customerId) {
+
+    return null;
+  }
+
+  public List<Position> fetchOpenPositionsByUser(String customerId, String userId) {
 
     return null;
   }

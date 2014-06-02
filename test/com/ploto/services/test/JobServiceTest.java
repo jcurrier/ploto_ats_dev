@@ -65,8 +65,8 @@ public class JobServiceTest {
       // Next, simply remove it.
       jobSvc.removePosition(p);
 
-      userSvc.removeUser(mgr.getEmail());
-      userSvc.removeUser(recruiter.getEmail());
+      userSvc.removeUser(customerId, mgr.getEmail());
+      userSvc.removeUser(customerId, recruiter.getEmail());
 
     } catch (ServiceException ex) {
       Assert.fail(ex.toString());

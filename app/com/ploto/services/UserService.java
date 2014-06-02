@@ -39,12 +39,14 @@ public class UserService {
     return newUser;
   }
 
-  public void removeUser(String email) {
+  public void removeUser(String customerId, String email) {
     Preconditions.checkNotNull(email);
     Preconditions.checkArgument(email.length() > 0 && email.contains("@"), "Invalid email address");
+    Preconditions.checkNotNull(customerId);
+    Preconditions.checkArgument(customerId.length() > 0, "Invalid customer id");
 
     try {
-      mUserServiceStore.removeUser(email);
+      mUserServiceStore.removeUser(customerId, email);
     } catch (StoreException ex) {
 
     }
@@ -57,20 +59,23 @@ public class UserService {
 
     boolean verdict = false;
     try {
-      verdict = mUserServiceStore.authenicateUser(email, password);
+      verdict = mUserServiceStore.authenticateUser(email, password);
     } catch (StoreException ex) {
     }
 
     return verdict;
   }
 
-  public User fetchUser(String email) {
+  public User fetchUser(String customerId, String email) {
     Preconditions.checkNotNull(email);
     Preconditions.checkArgument(email.length() > 0 && email.contains("@"), "Invalid email address");
+    Preconditions.checkNotNull(customerId);
+    Preconditions.checkArgument(customerId.length() > 0, "Invalid customer id");
+
 
     User locatedUser = null;
     try {
-      locatedUser = mUserServiceStore.fetchUser(email);
+      locatedUser = mUserServiceStore.fetchUser(customerId, email);
     } catch (StoreException ex) {
 
     }
@@ -78,7 +83,7 @@ public class UserService {
     return locatedUser;
   }
 
-  public boolean changePassword(String email, String oldPassword, String newPassword) {
+  public boolean changePassword(String customerId, String email, String oldPassword, String newPassword) {
     return false;
   }
 }
