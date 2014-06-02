@@ -1,7 +1,6 @@
 package com.ploto.services.test;
 
-import com.ploto.services.JobService;
-import com.ploto.services.Position;
+import com.ploto.services.*;
 import com.ploto.util.PlotoContext;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -46,19 +45,32 @@ public class JobServiceTest {
     Date posted = new Date(System.currentTimeMillis());
     Date lastUpdate = new Date(System.currentTimeMillis());
 
+    UserService userSvc = mCtx.getInjector().getInstance(UserService.class);
     JobService jobSvc = mCtx.getInjector().getInstance(JobService.class);
 
-    // First, create a job.
-    Position p = jobSvc.createPosition(new Position(customerId, title, desc, location, hiringMgrId, recruiterId));
-    Assert.assertEquals(p.getCustomerId(), customerId);
-    Assert.assertEquals(p.getTitle(), title);
-    Assert.assertEquals(p.getDescription(), desc);
-    Assert.assertEquals(p.getLocation(), location);
-    Assert.assertEquals(p.getHiringMgrId(), hiringMgrId);
-    Assert.assertEquals(p.getRecruiterId(), recruiterId);
+    User mgr = userSvc.createUser(customerId, "mgr@myco.com", "password");
+    User recruiter = userSvc.createUser(customerId, "recruiter@myco.com", "password");
 
-    // Next, simply remove it.
-    jobSvc.removePosition(p);
+    // First, create a job.
+    try {
+      Position p = jobSvc.createPosition(new Position(customerId, title, desc, location, mgr.getEmail(),
+          recruiter.getEmail()));
+      Assert.assertEquals(p.getCustomerId(), customerId);
+      Assert.assertEquals(p.getTitle(), title);
+      Assert.assertEquals(p.getDescription(), desc);
+      Assert.assertEquals(p.getLocation(), location);
+      Assert.assertEquals(p.getHiringMgrId(), mgr.getEmail());
+      Assert.assertEquals(p.getRecruiterId(), recruiter.getEmail());
+
+      // Next, simply remove it.
+      jobSvc.removePosition(p);
+
+      userSvc.removeUser(mgr.getEmail());
+      userSvc.removeUser(recruiter.getEmail());
+
+    } catch (ServiceException ex) {
+      Assert.fail(ex.toString());
+    }
 
     // Now, try to create some invalid jobs.
     try {
@@ -88,14 +100,6 @@ public class JobServiceTest {
       Assert.fail("didn't get expected exception on null location");
     } catch (Exception ex) {
     }
-
-    // Finally, try to remove a job which doesn't exist.
-        /*
-        try {
-            jobSvc.removePosition(testPos);
-            Assert.fail("Expected to get exception and didn't");
-        } catch (Exception ex) {}
-        */
   }
 
   @AfterClass

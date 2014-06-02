@@ -23,7 +23,8 @@ public class JobService {
     mJobServiceStore = PlotoContext.getInjector().getInstance(JobServiceStore.class);
   }
 
-  public Position createPosition(Position newPosition) {
+
+  public Position createPosition(Position newPosition) throws ServiceException {
     // Validate our input parameters.
     Preconditions.checkNotNull(newPosition);
     Preconditions.checkState(newPosition.getCustomerId() != null && newPosition.getCustomerId().length() > 1,
@@ -38,6 +39,12 @@ public class JobService {
         "Invalid Job Location");
 
     Position pos = null;
+
+    UserService userSvc = PlotoContext.getInjector().getInstance(UserService.class);
+
+    if(userSvc.fetchUser(newPosition.getHiringMgrId()) == null) {
+      throw new ServiceException("Hiring manager doesn't exist");
+    }
 
     try {
       pos = mJobServiceStore.createJob(newPosition.getCustomerId(), newPosition.getTitle(),
