@@ -2,15 +2,22 @@ package com.ploto.services;
 
 import com.ploto.util.PhoneNumber;
 
+import java.util.Date;
+
 /**
  * Created by jeff on 5/18/14.
  */
 public class Candidate {
+  private String mCustomerId;
+  private String mId;
   private String mFirstName;
   private String mLastName;
   private String mEmail;
-  private PhoneNumber mPrimaryPhone;
-  private PhoneNumber mSecondaryPhone;
+  private String mPrimaryPhone;
+  private String mSecondaryPhone;
+  private boolean mIsActive = false;
+  private String mResumeUrl;
+  private Date mLastUpdated;
 
   public String getFirstName() {
     return mFirstName;
@@ -24,21 +31,24 @@ public class Candidate {
     return mEmail;
   }
 
-  public PhoneNumber getPrimaryPhone() {
+  public String getPrimaryPhone() {
     return mPrimaryPhone;
   }
 
-  public PhoneNumber getSecondaryPhone() {
+  public String getSecondaryPhone() {
     return mSecondaryPhone;
   }
 
-  public Candidate(String firstName, String lastName, String email, PhoneNumber primaryPhone,
-                   PhoneNumber secondaryPhone) {
+  public Candidate(String customerId, String email, String firstName, String lastName, String primaryPhone,
+                   String secondaryPhone, String resumeUrl, boolean isActive, Date lastUpdated) {
     mFirstName = firstName;
     mLastName = lastName;
     mEmail = email;
+    mResumeUrl = resumeUrl;
     mPrimaryPhone = primaryPhone;
     mSecondaryPhone = secondaryPhone;
+    mIsActive = isActive;
+    mLastUpdated = lastUpdated;
   }
 
 }

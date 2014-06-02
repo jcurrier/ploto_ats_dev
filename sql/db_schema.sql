@@ -15,7 +15,7 @@ create table if not exists customer (
 );
 
 create table if not exists user (
-  customer_id      varchar(255) not null,
+  customer_id      varchar(255) null,
   id               varchar(255) not null,
   password         varchar(255),
   last_updated     timestamp default now(),
@@ -42,7 +42,7 @@ create table if not exists applicant (
   customer_id      varchar(255) not null,
   id               varchar(255) not null,
   resume_url       varchar(255) not null,
-  is_active        boolean,
+  is_active        boolean default true,
   last_updated     timestamp default now(),
   constraint pk_applicant primary key (customer_id, id)
 );
