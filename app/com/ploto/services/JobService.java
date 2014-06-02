@@ -46,6 +46,13 @@ public class JobService {
       throw new ServiceException("Hiring manager doesn't exist");
     }
 
+    // Since assigning a recruiter is optional at this point only check for this if we have to.
+    if(newPosition.getRecruiterId() != null) {
+      if(userSvc.fetchUser(newPosition.getRecruiterId()) == null) {
+        throw new ServiceException("Recruiter doesn't exist");
+      }
+    }
+
     try {
       pos = mJobServiceStore.createJob(newPosition.getCustomerId(), newPosition.getTitle(),
           newPosition.getDescription(), newPosition.getLocation(), newPosition.getHiringMgrId(),
