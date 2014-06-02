@@ -39,8 +39,36 @@ public class Candidate {
     return mSecondaryPhone;
   }
 
+  public String getCustomerId() { return mCustomerId; }
+
+  public void setCustomerId(String customerId) { this.mCustomerId = customerId; }
+
+  public String getResumeUrl() { return mResumeUrl; }
+
+  public void setResumeUrl(String resumeUrl) {this.mResumeUrl = resumeUrl; }
+
+  public Date getLastUpdated() { return mLastUpdated; }
+
+  public void setLastUpdated(Date lastUpdated) { this.mLastUpdated = lastUpdated; }
+
+  public boolean getIsActive() { return mIsActive; }
+
+  public void setIsActive(boolean isActive) { this.mIsActive = isActive; }
+
+  public Candidate(String customerId, String email, String firstName, String lastName, String primaryPhone,
+                   String secondaryPhone, String resumeUrl) {
+    mCustomerId = customerId;
+    mFirstName = firstName;
+    mLastName = lastName;
+    mEmail = email;
+    mResumeUrl = resumeUrl;
+    mPrimaryPhone = primaryPhone;
+    mSecondaryPhone = secondaryPhone;
+  }
+
   public Candidate(String customerId, String email, String firstName, String lastName, String primaryPhone,
                    String secondaryPhone, String resumeUrl, boolean isActive, Date lastUpdated) {
+    mCustomerId = customerId;
     mFirstName = firstName;
     mLastName = lastName;
     mEmail = email;
@@ -50,5 +78,6 @@ public class Candidate {
     mIsActive = isActive;
     mLastUpdated = lastUpdated;
   }
+
 
 }

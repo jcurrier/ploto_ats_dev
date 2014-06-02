@@ -28,7 +28,7 @@ public class CandidateServiceSqlStore extends BaseSqlStore implements CandidateS
   }
 
   @Override
-  public Candidate CreateCandidate(String customerId, String emailAddress, String firstName, String lastName,
+  public Candidate createCandidate(String customerId, String emailAddress, String firstName, String lastName,
                                    String primaryPhone, String secondaryPhone, String cvUrl) throws StoreException {
 
     Connection dbConn = null;
@@ -71,7 +71,7 @@ public class CandidateServiceSqlStore extends BaseSqlStore implements CandidateS
   }
 
   @Override
-  public void RemoveCandidate(String customerId, String candidateId) throws StoreException {
+  public void removeCandidate(String customerId, String candidateId) throws StoreException {
     Connection dbConn = null;
     try {
       dbConn = getConnection();

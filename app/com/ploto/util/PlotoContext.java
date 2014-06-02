@@ -30,6 +30,8 @@ public class PlotoContext {
         bind(JobService.class);
         bind(UserServiceStore.class).to(UserServiceSqlStore.class);
         bind(UserService.class);
+        bind(CandidateServiceStore.class).to(CandidateServiceSqlStore.class);
+        bind(UserService.class);
       }
     });
   }
@@ -42,6 +44,8 @@ public class PlotoContext {
         bind(JobServiceStore.class).to(JobServiceSqlStore.class);
         bind(JobService.class);
         bind(UserServiceStore.class).to(UserServiceSqlStore.class);
+        bind(UserService.class);
+        bind(CandidateServiceStore.class).to(CandidateServiceSqlStore.class);
         bind(UserService.class);
       }
     });
