@@ -26,17 +26,23 @@ public class JobService {
   public Position createPosition(Position newPosition) {
     // Validate our input parameters.
     Preconditions.checkNotNull(newPosition);
+    Preconditions.checkState(newPosition.getCustomerId() != null && newPosition.getCustomerId().length() > 1,
+        "Invalid Job Title");
     Preconditions.checkState(newPosition.getTitle() != null && newPosition.getTitle().length() > 1,
             "Invalid Job Title");
     Preconditions.checkState(newPosition.getDescription() != null && newPosition.getDescription().length() > 1,
             "Invalid Job Description");
     Preconditions.checkState(newPosition.getLocation() != null && newPosition.getLocation().length() > 1,
             "Invalid Job Location");
+    Preconditions.checkState(newPosition.getHiringMgrId() != null && newPosition.getHiringMgrId().length() > 1,
+        "Invalid Job Location");
 
     Position pos = null;
 
     try {
-      pos = mJobServiceStore.storeJob(newPosition);
+      pos = mJobServiceStore.createJob(newPosition.getCustomerId(), newPosition.getTitle(),
+          newPosition.getDescription(), newPosition.getLocation(), newPosition.getHiringMgrId(),
+          newPosition.getRecruiterId());
     } catch (StoreException ex) {
 
     }
@@ -51,7 +57,7 @@ public class JobService {
             "Invalid Job ID");
 
     try {
-      mJobServiceStore.removeJob(positionToRemove);
+      mJobServiceStore.removeJob(positionToRemove.getCustomerId(), positionToRemove.getId());
     } catch (StoreException ex) {
 
     }

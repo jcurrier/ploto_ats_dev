@@ -3,6 +3,7 @@ package com.ploto.services.store;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.ploto.services.Candidate;
 import com.ploto.services.Position;
 
 import java.util.HashMap;
@@ -24,20 +25,28 @@ public class JobServiceTestStore implements JobServiceStore {
   }
 
   @Override
-  public Position storeJob(Position newPosition) {
-
-    mJobMap.put(newPosition.getId(), newPosition);
-    return newPosition;
+  public Position createJob(String customerId, String title, String description, String location, String hiringMgrid,
+                            String recruiterId) throws StoreException {
+    return null;
   }
 
   @Override
-  public void removeJob(Position positionToRemove) {
+  public void removeJob(String customerId, String id) throws StoreException {
 
   }
 
   @Override
-  public ImmutableList<Position> fetchOpenPositions() {
+  public void applyForJob(String customerId, String positionId, Candidate applicant) throws StoreException {
 
+  }
+
+  @Override
+  public void withdrawApplication(String customerId, String positionId, Candidate applicant) throws StoreException {
+
+  }
+
+  @Override
+  public ImmutableList<Position> fetchOpenPositions(String customerId) throws StoreException {
     return null;
   }
 }

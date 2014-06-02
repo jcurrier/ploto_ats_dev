@@ -6,16 +6,27 @@ import java.util.Date;
  * Created by jeff on 5/18/14.
  */
 public class Position {
+  private String mCustomerid;
   private String mId;
   private String mTitle;
   private String mDescription;
   private String mLocation;
+  private String mHiringMgrId;
+  private String mRecruiterId;
   private short mStatus;
   private Date mDatePosted;
   private Date mLastUpdated;
 
   public static final short OPEN_STATUS = 0;
   public static final short CLOSED_STATUS = 1;
+
+  public String getCustomerId() {
+    return mCustomerid;
+  }
+
+  public void setCustomerId(String customerId) {
+    mCustomerid = customerId;
+  }
 
   public String getId() {
     return mId;
@@ -53,6 +64,18 @@ public class Position {
     return mStatus;
   }
 
+  public String getHiringMgrId() {
+    return mHiringMgrId;
+  }
+
+  public void setHiringMgrId(String hiringMgrId) {
+    mHiringMgrId = hiringMgrId;
+  }
+
+  public String getRecruiterId() { return mRecruiterId; }
+
+  public void setRecruiterId(String recruiterId) { mRecruiterId = recruiterId; }
+
   public Date getDatePosted() {
     return mDatePosted;
   }
@@ -64,21 +87,28 @@ public class Position {
   public Position() {
   }
 
-  public Position(String id, String jobTitle, String description, String location, short status, Date datePosted,
-                  Date lastUpdated) {
+  public Position(String customerId, String id, String jobTitle, String description, String location,
+                  String hiringMgrId, String recruiterId, short status, Date datePosted, Date lastUpdated) {
+    this.mCustomerid = customerId;
     this.mId = id;
     this.mTitle = jobTitle;
     this.mDescription = description;
     this.mLocation = location;
     this.mStatus = status;
+    this.mHiringMgrId = hiringMgrId;
+    this.mRecruiterId = recruiterId;
     this.mDatePosted = datePosted;
     this.mLastUpdated = lastUpdated;
   }
 
-  public Position(String jobTitle, String description, String location) {
+  public Position(String customerId, String jobTitle, String description, String location, String hiringMgrId,
+                  String recruiterId) {
+    this.mCustomerid = customerId;
     this.mTitle = jobTitle;
     this.mDescription = description;
     this.mLocation = location;
+    this.mHiringMgrId = hiringMgrId;
+    this.mRecruiterId = recruiterId;
     this.mStatus = OPEN_STATUS;
   }
 }
