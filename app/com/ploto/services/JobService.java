@@ -9,6 +9,7 @@ import com.ploto.services.store.JobServiceStore;
 import com.ploto.services.store.StoreException;
 import com.ploto.util.PlotoContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class JobService {
     // Validate our input parameters.
     Preconditions.checkNotNull(newPosition);
     Preconditions.checkState(newPosition.getCustomerId() != null && newPosition.getCustomerId().length() > 1,
-        "Invalid Job Title");
+        "Invalid Customer Id");
     Preconditions.checkState(newPosition.getTitle() != null && newPosition.getTitle().length() > 1,
             "Invalid Job Title");
     Preconditions.checkState(newPosition.getDescription() != null && newPosition.getDescription().length() > 1,
@@ -60,7 +61,8 @@ public class JobService {
           newPosition.getDescription(), newPosition.getLocation(), newPosition.getHiringMgrId(),
           newPosition.getRecruiterId());
     } catch (StoreException ex) {
-
+      System.out.println("Caught JobService::createPosition caught exception");
+      ex.printStackTrace();
     }
 
     return pos;
@@ -80,13 +82,35 @@ public class JobService {
   }
 
   public List<Position> fetchOpenPositions(String customerId) {
+    Preconditions.checkState(customerId != null && customerId.length() > 1,
+        "Invalid Customer Id");
 
-    return null;
+    List<Position> openPositions = new ArrayList<Position>();
+
+    try {
+      openPositions = mJobServiceStore.fetchOpenPositions(customerId);
+    } catch (StoreException ex) {
+
+    }
+
+    return openPositions;
   }
 
   public List<Position> fetchOpenPositionsByUser(String customerId, String userId) {
+    Preconditions.checkState(customerId != null && customerId.length() > 1,
+        "Invalid Customer Id");
+    Preconditions.checkState(userId != null && userId.length() > 1,
+        "Invalid User Id");
 
-    return null;
+    List<Position> openPositions = new ArrayList<Position>();
+
+    try {
+      openPositions = mJobServiceStore.fetchOpenPositionsByUser(customerId, userId);
+    } catch (StoreException ex) {
+
+    }
+
+    return openPositions;
   }
 };
 

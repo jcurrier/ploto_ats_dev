@@ -8,6 +8,7 @@ import com.ploto.services.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -48,10 +49,14 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
         throw new StoreException("Failed to create user");
       }
 
+      ps.close();
     } catch (Exception ex) {
       throw new StoreException("Unable to create user", ex);
 
     } finally {
+      if (dbConn != null) {
+        try { dbConn.close(); } catch(SQLException ex) {}
+      }
     }
 
     return fetchUser(customerId, userId);
@@ -74,10 +79,14 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
         throw new StoreException("Failed to remove user");
       }
 
+      ps.close();
     } catch (Exception ex) {
       throw new StoreException("Unable to remove user", ex);
 
     } finally {
+      if (dbConn != null) {
+        try { dbConn.close(); } catch(SQLException ex) {}
+      }
     }
   }
 
@@ -103,9 +112,14 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
         verdict = true;
       }
 
+      ps.close();
+      results.close();
     } catch (Exception ex) {
       throw new StoreException("Unable to retrieve user", ex);
     } finally {
+      if (dbConn != null) {
+        try { dbConn.close(); } catch(SQLException ex) {}
+      }
     }
 
     return verdict;
@@ -129,9 +143,14 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
       user = new User(results.getString("customer_id"), results.getString("id"), results.getString("password"),
               results.getBoolean("is_active"), results.getTimestamp("last_updated"));
 
+      ps.close();
+      results.close();
     } catch (Exception ex) {
       throw new StoreException("Unable to retrieve user", ex);
     } finally {
+      if (dbConn != null) {
+        try { dbConn.close(); } catch(SQLException ex) {}
+      }
     }
 
     return user;

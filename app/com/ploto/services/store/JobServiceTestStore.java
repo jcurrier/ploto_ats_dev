@@ -7,6 +7,7 @@ import com.ploto.services.Candidate;
 import com.ploto.services.Position;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,7 +47,12 @@ public class JobServiceTestStore implements JobServiceStore {
   }
 
   @Override
-  public ImmutableList<Position> fetchOpenPositions(String customerId) throws StoreException {
+  public List<Position> fetchOpenPositions(String customerId) throws StoreException {
+    return null;
+  }
+
+  @Override
+  public List<Position> fetchOpenPositionsByUser(String customerId, String userId) throws StoreException {
     return null;
   }
 }

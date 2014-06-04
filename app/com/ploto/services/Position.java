@@ -111,4 +111,57 @@ public class Position {
     this.mRecruiterId = recruiterId;
     this.mStatus = OPEN_STATUS;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (obj instanceof Position != true) {
+      return super.equals(obj);
+    }
+
+    Position tmp = (Position)obj;
+    if(!this.getCustomerId().equals(tmp.getCustomerId())) {
+      return false;
+    }
+
+    if(this.getDatePosted() != null &&
+        !this.getDatePosted().equals(tmp.getDatePosted())) {
+      return false;
+    }
+
+    if(!this.getDescription().equals(tmp.getDescription())) {
+      return false;
+    }
+
+    if(!this.getHiringMgrId().equals(tmp.getHiringMgrId())) {
+      return false;
+    }
+
+    if(!this.getId().equals(tmp.getId())) {
+      return false;
+    }
+
+    if(this.getLastUpdateTime() != null &&
+        !this.getLastUpdateTime().equals(tmp.getLastUpdateTime())) {
+      return false;
+    }
+
+    if(!this.getLocation().equals(tmp.getLocation())) {
+      return false;
+    }
+
+    if(!this.getRecruiterId().equals(tmp.getRecruiterId())) {
+      return false;
+    }
+
+    if(this.getStatus() != tmp.getStatus()) {
+      return false;
+    }
+
+    if(!this.getTitle().equals(tmp.getTitle())) {
+      return false;
+    }
+
+    return true;
+  }
 }

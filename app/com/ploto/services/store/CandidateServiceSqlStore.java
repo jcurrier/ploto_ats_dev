@@ -115,6 +115,8 @@ public class CandidateServiceSqlStore extends BaseSqlStore implements CandidateS
           results.getString("secondary_phone"), results.getString("resume_url"), results.getBoolean("is_active"),
           results.getDate("last_updated"));
 
+      results.close();
+
     } catch (Exception ex) {
       throw new StoreException("Unable to retrieve candidate", ex);
     } finally {
