@@ -27,12 +27,12 @@ public class Application extends Controller {
     ArrayList<Activity> activities = new ArrayList<Activity>();
     activities.add(new Activity("activity 1", "user", "Sunday 7:00PM"));
     activities.add(new Activity("activity 2", "user 2", "Sunday 9:00PM"));
-    Content tmp = com.ploto.views.html.dashboard2.render(activities);
+    Content tmp = com.ploto.views.html.dashboard.render(activities);
 
     String ctxVal = session().get("app_ctx");
     String s = tmp.body();
     String s2 = tmp.toString();
-    return ok(com.ploto.views.html.dashboard2.render(activities));
+    return ok(com.ploto.views.html.dashboard.render(activities));
   }
 
   @Security.Authenticated(Secured.class)
