@@ -1,9 +1,10 @@
 @import com.ploto.controllers.routes.Application
+@import com.ploto.controllers.routes.ApplicantsController
 
 <aside id="sidebar-main" class="sidebar">
 
     <div class="sidebar-logo">
-        <a href="index.html" id="logo-big"><h1>Ploto</h1><h2>/applicant systems</h2></a>
+        <a href="@Application.index()" id="logo-big"><h1>Ploto</h1><h2>/applicant systems</h2></a>
     </div><!-- End .sidebar-logo -->
 
     <!-- ********** -->
@@ -44,10 +45,10 @@
                     <nav class="sidebar-nav-v2">
                         <ul>
                             <li class="page-arrow active-page">
-                                <a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                                <a href="@Application.index()"><i class="fa fa-dashboard"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="statistics.html"><i class="fa fa-inbox">
+                                <a href=@ApplicantsController.index()><i class="fa fa-inbox">
                                 </i> Applicants<span class="indicator-dot">2</span></a>
                             </li>
                             <li>

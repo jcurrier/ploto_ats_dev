@@ -157,8 +157,8 @@ public class JobServiceTest {
       Assert.fail(ex.toString());
     }
 
-    // userSvc.removeUser(customerId, mgr.getEmail());
-    // userSvc.removeUser(customerId, recruiter.getEmail());
+    userSvc.removeUser(customerId, mgr.getEmail());
+    userSvc.removeUser(customerId, recruiter.getEmail());
   }
 
   @AfterClass

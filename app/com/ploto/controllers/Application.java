@@ -2,20 +2,18 @@ package com.ploto.controllers;
 
 import com.ploto.services.Activity;
 import com.ploto.services.UserService;
-import com.ploto.services.store.StoreException;
-import com.ploto.settings.PlotoSettings;
 import com.ploto.util.PlotoContext;
-import play.*;
-import play.data.*;
-import play.data.Form;
-import play.mvc.*;
-
-import static play.data.Form.*;
-
-import views.html.helper.*;
 import com.ploto.views.html.*;
 
+import play.data.Form;
+import play.mvc.Content;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
+
 import java.util.ArrayList;
+
+import static play.data.Form.form;
 
 public class Application extends Controller {
   private static PlotoContext mCtx = new PlotoContext();
@@ -29,7 +27,12 @@ public class Application extends Controller {
     ArrayList<Activity> activities = new ArrayList<Activity>();
     activities.add(new Activity("activity 1", "user", "Sunday 7:00PM"));
     activities.add(new Activity("activity 2", "user 2", "Sunday 9:00PM"));
-    return ok(main.render("Your new application is ready.", activities));
+    Content tmp = com.ploto.views.html.dashboard2.render(activities);
+
+    String ctxVal = session().get("app_ctx");
+    String s = tmp.body();
+    String s2 = tmp.toString();
+    return ok(com.ploto.views.html.dashboard2.render(activities));
   }
 
   @Security.Authenticated(Secured.class)

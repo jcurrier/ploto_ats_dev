@@ -1,5 +1,6 @@
 @(activities: List[com.ploto.services.Activity])
 
+@master("Applicants", activities) {
 <div class="window">
     <div class="actionbar">
         <!--
@@ -27,6 +28,14 @@
         </div>
         -->
     </div><!-- End .actionbar-->
+    <header id="header-sec">
+      <div class="inner-padding">
+        <div class="pull-left">
+          <h2>Applicants</h2>
+        </div>
+      </div><!-- End .inner-padding -->
+    </header><!-- End #header-sec -->
+
     <div class="row ext-raster">
         <div class="col-sm-8">
             <div class="row">
@@ -39,11 +48,136 @@
                         <section class="col-sm-12">
                             <!-- New widget -->
                             <div class="widget">
-                                <h3>widget 1</h3>
-                            </div><!-- End .widget -->
-                            <!-- New widget -->
-                            <div class="widget">
-                                <h3>widget 2</h3>
+                              <div class="subheading">
+                                <h3>Ticket Support</h3>
+                                <p>Tickets inside a table and inside a cmanager frame.</p>
+                              </div>
+                              <div class="spacer-20"></div>
+                              <div>
+                              <table class="table tablesorter table-bordered hasFilters tablesorter-bootstrap"
+                                     id="tablesorting-1">
+                                <colgroup>
+                                  <col style="width: 18%;">
+                                  <col style="width: 18.1%;">
+                                  <col style="width: 18.1%;">
+                                  <col style="width: 18.1%;">
+                                  <col style="width: 18.1%;">
+                                </colgroup>
+                              <thead>
+                                <tr class="tablesorter-headerRow">
+                                  <th data-column="0" class="tablesorter-header bootstrap-header tablesorter-headerAsc"
+                                      tabindex="0" unselectable="on" style="-webkit-user-select: none;">
+                                    <div class="tablesorter-wrapper" style="position:relative;height:100%;width:100%">
+                                      <div class="tablesorter-header-inner">Applicant<i class="tablesorter-icon tablesorter-icon fa fa-sort-up"></i>
+                                      </div>
+                                    </div>
+                                  </th>
+                                  <th class="filter-select filter-exact tablesorter-header bootstrap-header"
+                                      data-placeholder="Browsers" data-column="1" tabindex="0" unselectable="on"
+                                      style="-webkit-user-select: none;">
+                                        <div class="tablesorter-wrapper" style="position:relative;height:100%;width:100%">
+                                          <div class="tablesorter-header-inner">Status <i class="tablesorter-icon tablesorter-icon fa fa-sort"></i>
+                                          </div>
+                                        </div>
+                                  </th>
+                                  <th data-column="2" class="tablesorter-header bootstrap-header" tabindex="0"
+                                      unselectable="on" style="-webkit-user-select: none;">
+                                    <div class="tablesorter-wrapper" style="position:relative;height:100%;width:100%">
+                                      <div class="tablesorter-header-inner">Position <i class="tablesorter-icon tablesorter-icon fa fa-sort"></i>
+                                      </div>
+                                    </div>
+                                  </th>
+                                  <th data-column="3" class="tablesorter-header bootstrap-header" tabindex="0"
+                                      unselectable="on" style="-webkit-user-select: none;">
+                                    <div class="tablesorter-wrapper" style="position:relative;height:100%;width:100%">
+                                      <div class="tablesorter-header-inner">Last Updated <i class="tablesorter-icon tablesorter-icon fa fa-sort"></i>
+                                      </div></div></th>
+                                </tr>
+                                <tr class="tablesorter-filter-row">
+                                  <td><input type="search" placeholder="" class="tablesorter-filter" data-column="0"></td>
+                                  <td>
+                                    <select class="tablesorter-filter" data-column="1">
+                                      <option value=""></option>
+                                      <option value="New">New</option>
+                                      <option value="Qualified">Qualified</option>
+                                      <option value="Rejected">Rejected</option>
+                                      <option value="Scheduling">Scheduling</option>
+                                      <option value="InterviewComplete">Interview Completed</option>
+                                      <option value="Hired">Hired</option>
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <input type="search" placeholder="" class="tablesorter-filter" data-column="2">
+                                  </td>
+                                  <td>
+                                    <input type="search" placeholder="" class="tablesorter-filter" data-column="3">
+                                  </td>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              <tr class="odd">
+                                <td>James Johnson</td>
+                                <td>New</td>
+                                <td>Android Engineer</td>
+                                <td>6/2/2014</td>
+                              </tr>
+                              <tr class="even">
+                                <td>Nigel Ellis</td>
+                                <td>New</td>
+                                <td>Data Infrastructure Engineer</td>
+                                <td>6/1/2014</td>
+                              </tr>
+                              <tr class="odd">
+                                <td>Mac Daddy</td>
+                                <td>Rejected</td>
+                                <td>Data Infrastructure Engineer</td>
+                                <td>6/1/2014</td>
+                              </tr>
+                              <tr class="even">
+                                <td>Nino Bice</td>
+                                <td>Qualified</td>
+                                <td>Product Manager Mobile Products</td>
+                                <td>5/28/2014</td>
+                              </tr>
+                              <tr class="odd">
+                                <td>Bill Camino</td>
+                                <td>Scheduling</td>
+                                <td>Product Manager Mobile Products</td>
+                                <td>5/28/2014</td>
+                              </tr>
+                              <tr class="even">
+                                <td>Charlie Carson</td>
+                                <td>Hired</td>
+                                <td>Android Engineer</td>
+                                <td>6/2/2014</td>
+                              </tr>
+                              <tr class="odd">
+                                <td>Jeff Currier</td>
+                                <td>Interview Complete</td>
+                                <td>Android Engineer</td>
+                                <td>6/2/2014</td>
+                              </tr>
+                              </tbody>
+                              <tfoot>
+                              <tr>
+                                <td colspan="5" class="pager form-horizontal tablesorter-pager tablesorter-headerAsc" data-column="0">
+                                  <button class="btn first disabled"><i class="fa fa-step-backward"></i></button>
+                                  <button class="btn prev disabled"><i class="fa fa-arrow-left"></i></button>
+                                  <span class="pagedisplay">1 - 10 / 57 (57)</span> <!-- this can be any element, including an input -->
+                                  <button class="btn next"><i class="fa fa-arrow-right"></i></button>
+                                  <button class="btn last"><i class="fa fa-step-forward"></i></button>
+                                  <select class="pagesize input-xs" title="Select page size">
+                                    <option selected="selected" value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                  </select>
+                                  <select class="pagenum input-xs" title="Select page number"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+                                </td>
+                              </tr>
+                              </tfoot>
+                              </table>
+                              </div>
                             </div><!-- End .widget -->
                         </section>
                     </div>
@@ -54,6 +188,7 @@
             </div>
         </div><!-- End .row -->
     </div>
+
     <!--                     -->
     <!-- Start Activity area -->
     <!--                     -->
@@ -74,3 +209,4 @@
 <span class="ext-raster-line-bottom"></span>
 </div>
 </div><!-- End .window -->
+    }
