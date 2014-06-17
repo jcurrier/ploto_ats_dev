@@ -83,6 +83,20 @@ public class UserService {
     return locatedUser;
   }
 
+  public User fetchUser(String email) {
+    Preconditions.checkNotNull(email);
+    Preconditions.checkArgument(email.length() > 0 && email.contains("@"), "Invalid email address");
+
+    User locatedUser = null;
+    try {
+      locatedUser = mUserServiceStore.fetchUser(email);
+    } catch (StoreException ex) {
+
+    }
+
+    return locatedUser;
+  }
+
   public boolean changePassword(String customerId, String email, String oldPassword, String newPassword) {
     return false;
   }

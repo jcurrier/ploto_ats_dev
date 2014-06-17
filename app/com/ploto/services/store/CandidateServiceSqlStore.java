@@ -7,6 +7,7 @@ import com.ploto.services.Candidate;
 import com.ploto.services.Position;
 
 import java.sql.*;
+import java.util.List;
 
 /**
  * Created by jeff on 6/1/14.
@@ -91,6 +92,10 @@ public class CandidateServiceSqlStore extends BaseSqlStore implements CandidateS
     } finally {
     }
 
+  }
+
+  public List<Candidate> fetchCandidatesForPosition(List<Position> positions) throws StoreException {
+    return null;
   }
 
   private Candidate fetchCandidate(String customerId, String candidateId) throws StoreException{

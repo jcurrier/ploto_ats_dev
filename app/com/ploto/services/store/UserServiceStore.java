@@ -18,6 +18,8 @@ public interface UserServiceStore {
 
   public User fetchUser(String customerId, String userId) throws StoreException;
 
+  public User fetchUser(String userId) throws StoreException;
+
   public boolean changePassword(String customerId, String userId, String oldPassword,
                                 String newPassword) throws StoreException;
 

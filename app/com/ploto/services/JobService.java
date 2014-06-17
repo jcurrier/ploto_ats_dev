@@ -96,6 +96,20 @@ public class JobService {
     return openPositions;
   }
 
+  public List<Position> fetchOpenPositionsByUser(User theUser) {
+    Preconditions.checkState(theUser != null, "Invalid  User");
+
+    List<Position> openPositions = new ArrayList<Position>();
+
+    try {
+      openPositions = mJobServiceStore.fetchOpenPositionsByUser(theUser.getCustomerId(), theUser.getEmail());
+    } catch (StoreException ex) {
+
+    }
+
+    return openPositions;
+  }
+
   public List<Position> fetchOpenPositionsByUser(String customerId, String userId) {
     Preconditions.checkState(customerId != null && customerId.length() > 1,
         "Invalid Customer Id");

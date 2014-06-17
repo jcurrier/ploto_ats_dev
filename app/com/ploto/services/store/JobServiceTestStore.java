@@ -48,6 +48,7 @@ public class JobServiceTestStore implements JobServiceStore {
 
   @Override
   public List<Position> fetchOpenPositions(String customerId) throws StoreException {
+
     return null;
   }
 

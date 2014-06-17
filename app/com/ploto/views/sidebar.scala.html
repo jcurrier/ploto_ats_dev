@@ -1,5 +1,6 @@
 @import com.ploto.controllers.routes.Application
 @import com.ploto.controllers.routes.ApplicantsController
+@import com.ploto.controllers.routes.JobsController
 
 <aside id="sidebar-main" class="sidebar">
 
@@ -46,6 +47,10 @@
                         <ul>
                             <li class="page-arrow active-page">
                                 <a href="@Application.index()"><i class="fa fa-dashboard"></i> Dashboard</a>
+                            </li>
+                            <li>
+                              <a href=@JobsController.index()><i class="fa fa-inbox">
+                              </i> Positions</a>
                             </li>
                             <li>
                                 <a href=@ApplicantsController.index()><i class="fa fa-inbox">

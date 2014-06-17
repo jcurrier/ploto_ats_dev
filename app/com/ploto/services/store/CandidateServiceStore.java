@@ -1,6 +1,9 @@
 package com.ploto.services.store;
 
 import com.ploto.services.Candidate;
+import com.ploto.services.Position;
+
+import java.util.List;
 
 /**
  * Created by jeff on 6/1/14.
@@ -11,4 +14,6 @@ public interface CandidateServiceStore {
                                    String primaryPhone, String secondaryPhone, String cvUrl) throws StoreException;
 
   public void removeCandidate(String customerId, String candidateId) throws StoreException;
+
+  public List<Candidate> fetchCandidatesForPosition(List<Position> positions) throws StoreException;
 }

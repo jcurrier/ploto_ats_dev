@@ -1,9 +1,7 @@
 package com.ploto.controllers;
 
 import com.ploto.services.*;
-import com.ploto.settings.PlotoSettings;
 import com.ploto.util.PlotoContext;
-import com.ploto.views.html.*;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -12,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by jeff on 6/3/14.
+ * Created by jeff on 6/16/14.
  */
-public class ApplicantsController extends Controller {
+public class JobsController extends Controller {
   private static PlotoContext mCtx = new PlotoContext();
 
   @Security.Authenticated(Secured.class)
@@ -36,6 +34,6 @@ public class ApplicantsController extends Controller {
 
     }
 
-    return ok(com.ploto.views.html.applicants.render(activities));
+    return ok(com.ploto.views.html.jobs.render(positions, activities));
   }
 }

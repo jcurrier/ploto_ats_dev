@@ -14,7 +14,7 @@ public class User {
   private Boolean mIsActive = false;
   private Date mLastUpdated = null;
 
-  public String getmCustomerId() { return mCustomerId; }
+  public String getCustomerId() { return mCustomerId; }
 
   public void setCustomerId(String customerId) {
     this.mCustomerId = customerId;

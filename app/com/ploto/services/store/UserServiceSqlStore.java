@@ -157,6 +157,35 @@ public class UserServiceSqlStore extends BaseSqlStore implements UserServiceStor
   }
 
   @Override
+  public User fetchUser(String userId) throws StoreException {
+    User user = null;
+    Connection dbConn = null;
+
+    try {
+      dbConn = getConnection();
+
+      PreparedStatement ps = dbConn.prepareStatement(SIMPLE_FETCH_USER);
+      ps.setString(1, userId);
+      ResultSet results = ps.executeQuery();
+      results.first();
+
+      user = new User(results.getString("customer_id"), results.getString("id"), results.getString("password"),
+          results.getBoolean("is_active"), results.getTimestamp("last_updated"));
+
+      ps.close();
+      results.close();
+    } catch (Exception ex) {
+      throw new StoreException("Unable to retrieve user", ex);
+    } finally {
+      if (dbConn != null) {
+        try { dbConn.close(); } catch(SQLException ex) {}
+      }
+    }
+
+    return user;
+  }
+
+  @Override
   public boolean changePassword(String customerId, String userid, String oldPassword,
                                 String newPassword) throws StoreException {
     return false;

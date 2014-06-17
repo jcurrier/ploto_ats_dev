@@ -47,6 +47,7 @@ public class Application extends Controller {
   public static Result authenticate() {
     System.out.println("In App::authenticate");
     Form<Login> loginForm = form(Login.class).bindFromRequest();
+    loginForm = form(Login.class).bindFromRequest();
     System.out.println("user = " + loginForm.data().get("email") + " pw = " + loginForm.data().get("password"));
 
     if (loginForm.hasErrors()) {
